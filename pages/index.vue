@@ -13,11 +13,19 @@
 			<h1 class="title-large-dark m-0">{{ renderLobbyText() }}</h1>
 			<img src="@/assets/images/gf-lock.svg" class="ml-4" alt="lock" />
 		</section>
+		<div class="flag mx-4 caption-small-light p-1">FIFA 19</div>
+		<section class="cards p-4">
+			<TeamLeader :user="user" />
+		</section>
 	</main>
 </template>
 
 <script>
+import TeamLeader from '~/components/cards/TeamLeader.vue'
 export default {
+	components: {
+		TeamLeader
+	},
 	head() {
 		return {
 			title: 'Gfinity - Matchmaking Lobby'
@@ -46,11 +54,21 @@ div.background-image {
 	top: 0;
 	right: 0;
 	background-image: url('~@/assets/images/fifa19-ronaldo-fg-lg.png');
-	background-position: 170px -310px;
+	background-position: 170px -315px;
 	background-repeat: no-repeat;
 	z-index: -999;
 }
 section.header {
 	border-bottom: 1px solid #cfd1c7;
+}
+div.flag {
+	background-color: #1b1b1b;
+	width: max-content;
+	border-radius: 0 999px 999px 0;
+}
+section.cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 </style>
