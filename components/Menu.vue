@@ -1,91 +1,37 @@
 <template>
 	<section>
-		<table ref="types" class="menu">
-			<tbody @click="handleMenu('types')">
-				<tr>
-					<td>
-						<span class="callout-small-dark-bold">Type</span>
-					</td>
-					<td>
-						<span class="callout-small-dark-reg">
-							{{ selectedType }}
-						</span>
-					</td>
-					<td>
-						<img
-							:class="open === 'types' ? 'open' : 'close'"
-							src="@/assets/images/gf-caret-down.png"
-							alt=""
-						/>
-					</td>
-				</tr>
-			</tbody>
-			<tbody v-for="(option, i) in types" :key="i">
-				<tr class="option" @click="handleClick('types', i)">
-					<td></td>
-					<td>
-						<span class="callout-small-dark-reg">{{ option }}</span>
-					</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<table ref="gameModes" class="menu">
-			<tbody @click="handleMenu('gameModes')">
-				<tr>
-					<td>
-						<span class="callout-small-dark-bold">Gamemode</span>
-					</td>
-					<td>
-						<span class="callout-small-dark-reg">
-							{{ selectedGameMode }}
-						</span>
-					</td>
-					<td>
-						<img
-							:class="open === 'gameModes' ? 'open' : 'close'"
-							src="@/assets/images/gf-caret-down.png"
-							alt=""
-						/>
-					</td>
-				</tr>
-			</tbody>
-			<tbody v-for="(option, i) in gameModes" :key="i">
-				<tr class="option" @click="handleClick('gameModes', i)">
-					<td></td>
-					<td>
-						<span class="callout-small-dark-reg">{{ option }}</span>
-					</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<table ref="lobbies" class="menu">
-			<tbody @click="handleMenu('lobbies')">
+		<table
+			v-for="(menu, index) in data"
+			:key="index"
+			:ref="'menu' + index"
+			class="menu"
+		>
+			<tbody @click="handleMenu(index)">
 				<tr>
 					<td>
 						<span class="callout-small-dark-bold">
-							Lobby Status
+							{{ menu.name }}
 						</span>
 					</td>
 					<td>
 						<span class="callout-small-dark-reg">
-							{{ selectedLobby }}
+							{{ menu.selected }}
 						</span>
 					</td>
 					<td>
 						<img
-							:class="open === 'lobbies' ? 'open' : 'close'"
+							:class="open === index ? 'open' : 'close'"
 							src="@/assets/images/gf-caret-down.png"
 							alt=""
 						/>
 					</td>
 				</tr>
 			</tbody>
-			<tbody v-for="(option, i) in lobbies" :key="i">
-				<tr class="option" @click="handleClick('lobbies', i)">
+			<tbody
+				v-for="(option, optionIndex) in menu.options"
+				:key="optionIndex"
+			>
+				<tr class="option" @click="handleClick(index, optionIndex)">
 					<td></td>
 					<td>
 						<span class="callout-small-dark-reg">{{ option }}</span>
@@ -95,7 +41,7 @@
 			</tbody>
 		</table>
 
-		<div class="placeholder"></div>
+		<div ref="placeholder" class="placeholder"></div>
 	</section>
 </template>
 
@@ -103,69 +49,68 @@
 export default {
 	data() {
 		return {
-			open: null,
-			selectedType: 'Competitive',
-			selectedGameMode: 'Squad Battles',
-			selectedLobby: 'Invite Only',
-			types: ['Friendly'],
-			gameModes: [
-				'Ultimate Team',
-				'Kick Off',
-				'Skill Games',
-				'Practice Arena'
+			data: [
+				{
+					name: 'Type',
+					selected: 'Competitive',
+					options: ['Friendly']
+				},
+				{
+					name: 'Gamemode',
+					selected: 'Squad Battles',
+					options: [
+						'Ultimate Team',
+						'Kick Off',
+						'Skill Games',
+						'Practice Arena'
+					]
+				},
+				{
+					name: 'Lobby Status',
+					selected: 'Invite Only',
+					options: ['Public']
+				}
 			],
-			lobbies: ['Public']
+			open: null
 		}
 	},
 	watch: {
 		open() {
-			const element = this.open
 			this.initializePositions()
-			if (!element) return
-			const size = this[element].length * 50
-			this.$refs[element].style.transform = `translateY(-${size}px)`
-			if (element === 'gameModes') {
-				this.$refs.types.style.transform = `translateY(-${size}px)`
-			} else if (element === 'lobbies') {
-				this.$refs.types.style.transform = `translateY(-${size}px)`
-				this.$refs.gameModes.style.transform = `translateY(-${size}px)`
-			}
+			const index = this.open
+			if (index === null) return
+			const size = this.data[index].options.length * 50
+			this.data.some((_, i) => {
+				const [element] = this.$refs['menu' + i]
+				element.style.transform = `translateY(-${size}px)`
+				return i === index
+			})
 		}
 	},
 	mounted() {
+		const height = this.data.length * 50
+		this.$refs.placeholder.style.height = `${height}px`
 		this.initializePositions()
 	},
 	methods: {
-		handleMenu(element) {
-			if (element === this.open) return (this.open = null)
-			this.open = element
+		handleMenu(index) {
+			if (index === this.open) return (this.open = null)
+			this.open = index
 		},
 		initializePositions() {
-			this.$refs.types.style.top = '0px'
-			this.$refs.gameModes.style.top = '50px'
-			this.$refs.lobbies.style.top = '100px'
-			this.$refs.types.style.transform = ''
-			this.$refs.gameModes.style.transform = ''
-			this.$refs.lobbies.style.transform = ''
+			let position = 0
+			this.data.forEach((_, i) => {
+				const [element] = this.$refs['menu' + i]
+				element.style.top = `${position}px`
+				element.style.transform = ''
+				position += 50
+			})
 		},
-		handleClick(target, index) {
-			let selected
-			switch (target) {
-				case 'types':
-					selected = this.selectedType
-					this.selectedType = this[target][index]
-					break
-				case 'gameModes':
-					selected = this.selectedGameMode
-					this.selectedGameMode = this[target][index]
-					break
-				case 'lobbies':
-					selected = this.selectedLobby
-					this.selectedLobby = this[target][index]
-					break
-			}
-			this[target].splice(index, 1)
-			this[target].unshift(selected)
+		handleClick(menuIndex, optionIndex) {
+			const prevValue = this.data[menuIndex].selected
+			const newValue = this.data[menuIndex].options[optionIndex]
+			this.data[menuIndex].options.splice(optionIndex, 1, prevValue)
+			this.data[menuIndex].selected = newValue
 			this.initializePositions()
 			this.open = null
 		}
@@ -178,7 +123,6 @@ section {
 	margin: 0 1rem;
 	position: relative;
 	div.placeholder {
-		height: 150px;
 		pointer-events: none;
 	}
 	table.menu {
