@@ -42,6 +42,14 @@ $light-gray: #6b6b65;
 	line-height: 19px;
 }
 
+.callout-medium-light {
+	font-family: akzidenzgrotesk-bold;
+	font-size: 16px;
+	color: $white;
+	letter-spacing: -0.5px;
+	line-height: 19px;
+}
+
 .title-large-dark {
 	font-family: akzidenzgrotesk-bold;
 	font-size: 36px;
@@ -72,4 +80,20 @@ $light-gray: #6b6b65;
 	color: $dark-gray;
 	letter-spacing: 1.5px;
 	line-height: 12px;
+}
+
+.title-super-light {
+	font-family: akzidenzgrotesk-bold;
+	font-size: 48px;
+	color: $white;
+	letter-spacing: -3px;
+	line-height: 44px;
+}
+
+.body-light {
+	font-family: akzidenzgrotesk-regular;
+	font-size: 18px;
+	color: $white;
+	letter-spacing: -0.75px;
+	line-height: 22px;
 }

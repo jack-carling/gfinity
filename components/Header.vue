@@ -19,10 +19,6 @@
 	</header>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style lang="scss" scoped>
 div.logo {
 	background-color: #1b1b1b;
