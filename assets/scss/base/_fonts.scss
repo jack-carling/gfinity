@@ -18,6 +18,22 @@ $light-gray: #6b6b65;
 	line-height: 17px;
 }
 
+.callout-small-light-bold {
+	font-family: akzidenzgrotesk-bold;
+	font-size: 14px;
+	color: $white;
+	letter-spacing: -0.5px;
+	line-height: 19px;
+}
+
+.callout-small-light-reg {
+	font-family: akzidenzgrotesk-regular;
+	font-size: 14px;
+	color: $white;
+	letter-spacing: -0.5px;
+	line-height: 17px;
+}
+
 .callout-medium-dark {
 	font-family: akzidenzgrotesk-bold;
 	font-size: 16px;

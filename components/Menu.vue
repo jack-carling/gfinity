@@ -53,7 +53,7 @@ export default {
 				{
 					name: 'Type',
 					selected: 'Competitive',
-					options: ['Friendly']
+					options: ['Cooperative']
 				},
 				{
 					name: 'Gamemode',
