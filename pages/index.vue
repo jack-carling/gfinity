@@ -16,15 +16,19 @@
 		<div class="flag mx-4 caption-small-light p-1">FIFA 19</div>
 		<section class="cards p-4">
 			<TeamLeader :user="user" />
+			<TeamPlayer />
 		</section>
 	</main>
 </template>
 
 <script>
 import TeamLeader from '~/components/cards/TeamLeader.vue'
+import TeamPlayer from '~/components/cards/TeamPlayer.vue'
+
 export default {
 	components: {
-		TeamLeader
+		TeamLeader,
+		TeamPlayer
 	},
 	head() {
 		return {
