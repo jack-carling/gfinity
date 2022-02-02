@@ -1,22 +1,34 @@
 <template>
 	<main>
-		<div class="background-image"></div>
-		<section class="header flex mx-4 py-4">
-			<img
-				src="@/assets/images/gf-arrow-left.svg"
-				class="cursor-pointer"
-				alt=""
-			/>
-			<span class="callout-medium-dark ml-8">Matchmaking Lobby</span>
+		<section class="content">
+			<div class="background-image"></div>
+			<section class="header flex mx-4 py-4">
+				<img
+					src="@/assets/images/gf-arrow-left.svg"
+					class="cursor-pointer"
+					alt=""
+				/>
+				<span class="callout-medium-dark ml-8">Matchmaking Lobby</span>
+			</section>
+			<section class="title flex p-4">
+				<h1 class="title-large-dark m-0">
+					{{ renderLobbyText() }}
+				</h1>
+				<img
+					src="@/assets/images/gf-lock.svg"
+					class="ml-4"
+					alt="lock"
+				/>
+			</section>
+			<div class="flag mx-4 caption-small-light p-1">FIFA 19</div>
+			<section class="cards p-4">
+				<TeamLeader :user="user" />
+				<TeamPlayer />
+			</section>
 		</section>
-		<section class="title flex p-4">
-			<h1 class="title-large-dark m-0">{{ renderLobbyText() }}</h1>
-			<img src="@/assets/images/gf-lock.svg" class="ml-4" alt="lock" />
-		</section>
-		<div class="flag mx-4 caption-small-light p-1">FIFA 19</div>
-		<section class="cards p-4">
-			<TeamLeader :user="user" />
-			<TeamPlayer />
+		<section class="menu">
+			<Menu />
+			<Footer />
 		</section>
 	</main>
 </template>
@@ -24,11 +36,15 @@
 <script>
 import TeamLeader from '~/components/cards/TeamLeader.vue'
 import TeamPlayer from '~/components/cards/TeamPlayer.vue'
+import Menu from '~/components/Menu.vue'
+import Footer from '~/components/Footer.vue'
 
 export default {
 	components: {
 		TeamLeader,
-		TeamPlayer
+		TeamPlayer,
+		Menu,
+		Footer
 	},
 	head() {
 		return {
@@ -51,6 +67,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+main {
+	height: calc(100% - 105px);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+}
 div.background-image {
 	position: absolute;
 	width: 375px;
