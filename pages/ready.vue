@@ -10,8 +10,8 @@
 					A match has been found for you!
 				</h1>
 				<p class="body-light px-4 py-8">
-					We've found a compatible opponent for you to play Squad
-					Battles with in FIFA 19
+					We've found a compatible opponent for you to play
+					{{ mode }} with in FIFA 19
 				</p>
 				<div class="info flex items-center ml-4">
 					<span class="caption-small-light">Lobby</span>
@@ -62,6 +62,9 @@ export default {
 			return (
 				'-' + new Date(this.timer * 1000).toTimeString().substring(3, 9)
 			)
+		},
+		mode() {
+			return this.$store.state.mode
 		}
 	},
 	head() {

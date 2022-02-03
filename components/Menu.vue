@@ -111,8 +111,12 @@ export default {
 			const newValue = this.data[menuIndex].options[optionIndex]
 			this.data[menuIndex].options.splice(optionIndex, 1, prevValue)
 			this.data[menuIndex].selected = newValue
+			if (menuIndex === 1) this.updateGameMode(newValue)
 			this.initializePositions()
 			this.open = null
+		},
+		updateGameMode(value) {
+			this.$store.commit('update', value)
 		}
 	}
 }
