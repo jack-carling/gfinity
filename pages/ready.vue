@@ -7,11 +7,11 @@
 					Matchmaking Lobby
 				</h2>
 				<h1 class="title-super-light px-4">
-					Searching for compatible opponents
+					A match has been found for you!
 				</h1>
 				<p class="body-light px-4 py-8">
-					We're searching our database of players to pair you with an
-					opponent of similar skill
+					We've found a compatible opponent for you to play Squad
+					Battles with in FIFA 19
 				</p>
 				<div class="info flex items-center ml-4">
 					<span class="caption-small-light">Lobby</span>
@@ -21,21 +21,22 @@
 					<div>
 						<div class="rectangle"></div>
 					</div>
-					<Counter />
+					<span class="footnote-light mr-8">
+						By tapping accept, you agree to play a match that may
+						last for up to 30 minutes.
+					</span>
 				</div>
 			</section>
 		</section>
 		<section class="menu flex items-center justify-between px-8">
-			<span class="callout-small-light-bold">{{ searching }}</span>
+			<span class="callout-small-light-bold">Accept</span>
 			<div class="flex">
 				<span class="callout-small-light-reg">{{ time }}</span>
-				<NuxtLink to="/">
-					<img
-						class="ml-8 cursor-pointer"
-						src="@/assets/images/gf-close.svg"
-						alt=""
-					/>
-				</NuxtLink>
+				<img
+					class="ml-8 cursor-pointer"
+					src="@/assets/images/gf-arrow-right.svg"
+					alt=""
+				/>
 			</div>
 		</section>
 	</main>
@@ -44,52 +45,35 @@
 <script>
 import Back from '~/components/Back.vue'
 import Avatar from '~/components/Avatar.vue'
-import Counter from '~/components/Counter.vue'
 
 export default {
 	layout: 'lobby',
 	components: {
 		Back,
-		Avatar,
-		Counter
+		Avatar
 	},
 	data() {
 		return {
-			searching: 'Searching',
-			timer: 0,
-			randomTime: this.randomInterval(30, 60)
+			timer: 60
 		}
 	},
 	computed: {
-		title() {
-			return 'Gfinity - ' + this.searching
-		},
 		time() {
-			return new Date(this.timer * 1000).toTimeString().substring(3, 9)
+			return (
+				'-' + new Date(this.timer * 1000).toTimeString().substring(3, 9)
+			)
 		}
 	},
 	head() {
 		return {
-			title: this.title
-		}
-	},
-	watch: {
-		timer() {
-			if (this.timer === this.randomTime) this.$router.push('/ready')
+			title: 'Gfinity - Ready'
 		}
 	},
 	mounted() {
 		setInterval(() => {
-			this.timer++
-			if (this.searching === 'Searching...')
-				return (this.searching = 'Searching')
-			this.searching += '.'
+			if (this.timer === 0) this.$router.push('/search')
+			this.timer--
 		}, 1000)
-	},
-	methods: {
-		randomInterval(min, max) {
-			return Math.floor(Math.random() * (max - min + 1) + min)
-		}
 	}
 }
 </script>
@@ -107,7 +91,7 @@ section.wrapper::before {
 	right: 0;
 	left: 0;
 	bottom: 0;
-	background: #293894;
+	background: #1b1b1b;
 	mix-blend-mode: multiply;
 	z-index: 0;
 }
@@ -132,7 +116,7 @@ div.info {
 section.menu {
 	width: calc(100% - 80px);
 	height: 90px;
-	background-color: #1b1b1b;
+	background-color: #293894;
 	position: relative;
 	top: -45px;
 	left: 80px;
