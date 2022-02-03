@@ -68,11 +68,12 @@ export default {
 
 <style lang="scss" scoped>
 main {
-	height: calc(100% - 105px);
+	min-height: calc(100% - 105px);
+	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	overflow: hidden;
+	overflow-y: hidden;
 }
 div.background-image {
 	position: absolute;
