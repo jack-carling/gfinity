@@ -1,5 +1,31 @@
 # Gfinity Front-end Assignment
 
+Assignment for Gfinity. First time using Nuxt.js and Tailwind CSS. Responsive design based on Figma sketch provided, but optimized for mobiles.
+
+## Preview Lobby
+
+![](https://user-images.githubusercontent.com/72305598/152375796-377df7ac-119f-4f2d-be5b-54ff59055012.gif)
+
+Flyup menu is dynamic and can be altered by changing the `data` array in `components/Menu.vue` which will render all the elements in their correct positions to retain animation on open/close.
+
+Number of people in queue is animated, and increases or decreases by a random number between 1-10 every five seconds.
+
+## Preview Search Page
+
+![](https://user-images.githubusercontent.com/72305598/152375807-45ab6f7f-effd-4aac-9c9b-2986c78b590e.gif)
+
+When on the search/ready pages the avatar is pulsing, and the timer is either ticking up or down.
+
+The `/search` page also contains the queue total as well as an animated `Searching...` text which is reused to make the meta-title dynamic. After a random interval between 30-60 seconds, the user is redirected to the `/ready` page.
+
+## Preview Ready Page
+
+![](https://user-images.githubusercontent.com/72305598/152375803-909ae647-7254-4b34-a19e-739bdfc88366.gif)
+
+The user will be redirected back from the `/ready` page unless accepting the match (which doesn't work) when the timer reaches 0. The game mode picked in the flyup menu will be displayed in the text.
+
+## Assignment Message
+
 Thank you for your time thus far interviewing with us. We've created this assignment to resemble something we work on routinely.
 
 This micro-app is intended to simulate a 1v1 matchmaking experience in which you've created a matchmaking lobby to find a match.
@@ -13,6 +39,10 @@ If you have any comments or questions about the design, please use the commentin
 Once completed, please _do not_ push commits to the original project. Please fork into your own repository, or push commits to a new origin of your choosing. In order to fork, log into a Bitbucket account and select the "+" sign on the far left of the screen.
 
 We really appreciate you taking the time to work on this and look forward to working with you in the future.
+
+## Figma
+
+![](https://user-images.githubusercontent.com/72305598/152376808-6705b29f-06e6-412a-9298-9ba08fcdf66c.png)
 
 ## Build Setup
 
